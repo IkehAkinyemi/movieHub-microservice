@@ -17,5 +17,5 @@ func main() {
 	http.HandleFunc("/metadata", http.HandlerFunc(h.GetMetadata))
 	if err := http.ListenAndServe(":8081", nil); err != nil {
 		panic(err)
-	} 
+	}
 }

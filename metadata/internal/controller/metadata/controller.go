@@ -10,10 +10,10 @@ import (
 
 // ErrNotFound is returned when a requested record is not
 // found.
-var ErrNotFound =  errors.New("not found")
+var ErrNotFound = errors.New("not found")
 
 type metadataRepository interface {
-	Get (ctx context.Context, id string) (*model.Metadata, error)
+	Get(ctx context.Context, id string) (*model.Metadata, error)
 }
 
 // Controller defines a metadata service controller.
@@ -29,7 +29,7 @@ func New(repo metadataRepository) *Controller {
 // Get returns a movie metadata by/for id.
 func (c *Controller) Get(ctx context.Context, id string) (*model.Metadata, error) {
 	res, err := c.repo.Get(ctx, id)
-	if err != nil && errors.Is(err, repository.ErrNotFound){
+	if err != nil && errors.Is(err, repository.ErrNotFound) {
 		return nil, ErrNotFound
 	}
 
