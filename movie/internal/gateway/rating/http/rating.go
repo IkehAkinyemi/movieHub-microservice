@@ -21,7 +21,7 @@ func New(addr string) *Gateway {
 	return &Gateway{addr}
 }
 
-// GetAggregateRating returns the aggregated rating for a 
+// GetAggregateRating returns the aggregated rating for a
 // record or ErrNotFound if there's no rating for it.
 func (g *Gateway) GetAggregateRating(ctx context.Context, recordID model.RecordID, recordType model.RecordType) (float64, error) {
 	req, err := http.NewRequest(http.MethodGet, g.addr+"/rating", nil)

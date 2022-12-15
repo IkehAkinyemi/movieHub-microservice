@@ -20,12 +20,12 @@ type ratingGateway interface {
 }
 
 type metadataGateway interface {
-	Get(ctx context.Context, id string) (*metadatamodel.Metadata, error) 
+	Get(ctx context.Context, id string) (*metadatamodel.Metadata, error)
 }
 
 // Controller defines a movie service controller.
 type Controller struct {
-	ratingGateway ratingGateway
+	ratingGateway   ratingGateway
 	metadataGateway metadataGateway
 }
 
