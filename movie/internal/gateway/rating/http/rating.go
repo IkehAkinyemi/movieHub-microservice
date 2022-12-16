@@ -4,27 +4,38 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"log"
+	"math/rand"
 	"net/http"
 
 	"moviehub.com/movie/internal/gateway"
+	"moviehub.com/pkg/discovery"
 	"moviehub.com/rating/pkg/model"
 )
 
 // Gateway defines an HTTP gateway for rating service.
 type Gateway struct {
-	addr string
+	registry discovery.Registry
+
 }
 
 // New instantiates a new HTTP gateway for a rating
 // service
-func New(addr string) *Gateway {
-	return &Gateway{addr}
+func New(registry discovery.Registry) *Gateway {
+	return &Gateway{registry}
 }
 
 // GetAggregateRating returns the aggregated rating for a
 // record or ErrNotFound if there's no rating for it.
 func (g *Gateway) GetAggregateRating(ctx context.Context, recordID model.RecordID, recordType model.RecordType) (float64, error) {
-	req, err := http.NewRequest(http.MethodGet, g.addr+"/rating", nil)
+	addrs, err := g.registry.ServiceAddresses(ctx, "rating")
+	if err != nil {
+		return 0, err
+	}
+	url := "http://" + addrs[rand.Intn(len(addrs))] + "/rating"
+	log.Printf("Calling rating service. Request: GET " + url)
+
+	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
 		return 0, err
 	}
@@ -56,7 +67,14 @@ func (g *Gateway) GetAggregateRating(ctx context.Context, recordID model.RecordI
 
 // PutRating writes a rating.
 func (g *Gateway) PutRating(ctx context.Context, recordID model.RecordID, recordType model.RecordType, rating *model.Rating) error {
-	req, err := http.NewRequest(http.MethodPut, g.addr+"/rating", nil)
+	addrs, err := g.registry.ServiceAddresses(ctx, "rating")
+	if err != nil {
+		return err
+	}
+	url := "http://" + addrs[rand.Intn(len(addrs))] + "/rating"
+	log.Printf("Calling rating service. Request: GET " + url)
+
+	req, err := http.NewRequest(http.MethodPut, url, nil)
 	if err != nil {
 		return err
 	}
