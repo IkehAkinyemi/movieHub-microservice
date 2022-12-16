@@ -43,7 +43,7 @@ func (r *Registry) Register(ctx context.Context, instanceID string, serviceName 
 }
 
 // Deregister removes a service from the
-// registry
+// registry.
 func (r *Registry) Deregister(ctx context.Context, instanceID string, serviceName string) error {
 	r.Lock()
 	defer r.Unlock()
