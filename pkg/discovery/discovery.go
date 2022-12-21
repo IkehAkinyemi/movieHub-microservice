@@ -10,7 +10,7 @@ import (
 
 // Registry defines a service registry.
 type Registry interface {
-	// Register creates a service instance record in the 
+	// Register creates a service instance record in the
 	// registry.
 	Register(ctx context.Context, instanceID string, serviceName string, hostPort string) error
 	// Deregister removes a service instance record from

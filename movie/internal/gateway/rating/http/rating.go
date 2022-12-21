@@ -16,7 +16,6 @@ import (
 // Gateway defines an HTTP gateway for rating service.
 type Gateway struct {
 	registry discovery.Registry
-
 }
 
 // New instantiates a new HTTP gateway for a rating

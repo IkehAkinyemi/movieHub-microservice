@@ -13,8 +13,9 @@ import (
 	ratinggateway "moviehub.com/movie/internal/gateway/rating/http"
 	httphandler "moviehub.com/movie/internal/handler/http"
 	"moviehub.com/pkg/discovery"
-	"moviehub.com/pkg/discovery/memory/consul"
+	"moviehub.com/pkg/discovery/consul"
 )
+
 const serviceName = "movie"
 
 func main() {
@@ -22,7 +23,6 @@ func main() {
 
 	flag.IntVar(&port, "port", 8083, "API Handler port")
 	flag.Parse()
-
 
 	log.Printf("Starting this movie service on port %d", port)
 
@@ -37,7 +37,7 @@ func main() {
 	if err := registry.Register(ctx, instanceID, serviceName, fmt.Sprintf("localhost:%d", port)); err != nil {
 		panic(err)
 	}
-	go func ()  {
+	go func() {
 		for {
 			if err := registry.ReportHealthyState(instanceID, serviceName); err != nil {
 				log.Println("Failed to report healthy state: " + err.Error())

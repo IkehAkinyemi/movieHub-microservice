@@ -46,10 +46,10 @@ func (r *Registry) Register(ctx context.Context, instanceID string, serviceName 
 
 	return r.client.Agent().ServiceRegister(&consul.AgentServiceRegistration{
 		Address: parts[0],
-		ID: instanceID,
-		Name: serviceName,
-		Port: port,
-		Check: &consul.AgentServiceCheck{CheckID: instanceID, TTL: "5s"},
+		ID:      instanceID,
+		Name:    serviceName,
+		Port:    port,
+		Check:   &consul.AgentServiceCheck{CheckID: instanceID, TTL: "5s"},
 	})
 }
 
@@ -81,4 +81,4 @@ func (r *Registry) ServiceAddresses(ctx context.Context, serviceName string) ([]
 // reporting healthy state to the healthy
 func (r *Registry) ReportHealthyState(instanceID string, _ string) error {
 	return r.client.Agent().PassTTL(instanceID, "")
-} 
+}

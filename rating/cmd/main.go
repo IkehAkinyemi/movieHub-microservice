@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"moviehub.com/pkg/discovery"
-	"moviehub.com/pkg/discovery/memory/consul"
+	"moviehub.com/pkg/discovery/consul"
 	"moviehub.com/rating/internal/controller/rating"
 	httphandler "moviehub.com/rating/internal/handler/http"
 	"moviehub.com/rating/internal/repository/memory"
@@ -28,13 +28,13 @@ func main() {
 		panic(err)
 	}
 
-	ctx :=context.Background()
+	ctx := context.Background()
 	instanceID := discovery.GenerateInstanceID(serviceName)
 
 	if err := registry.Register(ctx, instanceID, serviceName, fmt.Sprintf("localhost:%d", port)); err != nil {
 		panic(err)
 	}
-	go func ()  {
+	go func() {
 		for {
 			if err := registry.ReportHealthyState(instanceID, serviceName); err != nil {
 				log.Println("Failed to report healthy state: " + err.Error())

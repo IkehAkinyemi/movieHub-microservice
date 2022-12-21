@@ -12,8 +12,9 @@ import (
 	httphandler "moviehub.com/metadata/internal/handler/http"
 	"moviehub.com/metadata/internal/repository/memory"
 	"moviehub.com/pkg/discovery"
-	"moviehub.com/pkg/discovery/memory/consul"
+	"moviehub.com/pkg/discovery/consul"
 )
+
 const serviceName = "metadata"
 
 func main() {
@@ -34,7 +35,7 @@ func main() {
 	if err := registry.Register(ctx, instanceID, serviceName, fmt.Sprintf("localhost:%d", port)); err != nil {
 		panic(err)
 	}
-	go func ()  {
+	go func() {
 		for {
 			if err := registry.ReportHealthyState(instanceID, serviceName); err != nil {
 				log.Println("Failed to report healthy state: ", err.Error())

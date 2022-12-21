@@ -69,7 +69,7 @@ func (r *Registry) ReportHealthyState(instanceID string, serviceName string) err
 	if _, ok := r.serviceAddrs[lServiceName(serviceName)][lInstanceID(instanceID)]; !ok {
 		return errors.New("service instance is not registered yet")
 	}
-	
+
 	r.serviceAddrs[lServiceName(serviceName)][lInstanceID(instanceID)].lastActive = time.Now()
 
 	return nil
