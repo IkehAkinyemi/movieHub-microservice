@@ -11,16 +11,16 @@ import (
 )
 
 var metadata = &model.Metadata{
-	ID: "123",
-	Title: "The Movie 2",
-	Director: "Foo Bars",
+	ID:          "123",
+	Title:       "The Movie 2",
+	Director:    "Foo Bars",
 	Description: "Sequel of the legendary movie",
 }
 
 var genMetadata = &gen.Metadata{
-	Id: "123",
-	Title: "The Movie 2",
-	Director: "Foo Bars",
+	Id:          "123",
+	Title:       "The Movie 2",
+	Director:    "Foo Bars",
 	Description: "Sequel of the legendary movie",
 }
 

@@ -52,7 +52,7 @@ func main() {
 	ctrl := metadata.New(repo)
 	h := grpchandler.New(ctrl)
 
-	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", port))
+	listener, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", port))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
@@ -60,7 +60,7 @@ func main() {
 	reflection.Register(srv)
 	gen.RegisterMetadataServiceServer(srv, h)
 
-	if err := srv.Serve(lis); err != nil {
+	if err := srv.Serve(listener); err != nil {
 		panic(err)
 	}
 }

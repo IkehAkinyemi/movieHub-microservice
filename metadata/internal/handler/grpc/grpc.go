@@ -22,6 +22,7 @@ func New(ctrl *metadata.Controller) *Handler {
 	return &Handler{ctrl: ctrl}
 }
 
+// GetMetadata returns movie metadata by id.
 func (h *Handler) GetMetadata(ctx context.Context, req *gen.GetMetadataRequest) (*gen.GetMetadataResponse, error) {
 	if req == nil || req.MovieId == "" {
 		return nil, status.Errorf(codes.InvalidArgument, "nil req or empty id")
