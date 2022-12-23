@@ -12,7 +12,7 @@ import (
 
 // ErrNotFound is returned when the movie metadata is not
 // found.
-var ErrNotFound = errors.New("")
+var ErrNotFound = errors.New("movie metadata not found")
 
 type ratingGateway interface {
 	GetAggregateRating(ctx context.Context, recordID ratingmodel.RecordID, recordType ratingmodel.RecordType) (float64, error)
