@@ -19,6 +19,7 @@ func New(ctrl *movie.Controller) *Handler {
 	return &Handler{ctrl}
 }
 
+// GetMovieDetails retrieves movie Metadata and its aggregated rating value.
 func (h *Handler) GetMovieDetails(w http.ResponseWriter, req *http.Request) {
 	id := req.FormValue("id")
 	details, err := h.ctrl.Get(req.Context(), id)

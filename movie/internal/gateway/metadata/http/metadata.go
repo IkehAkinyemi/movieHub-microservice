@@ -55,7 +55,7 @@ func (g *Gateway) Get(ctx context.Context, id string) (*model.Metadata, error) {
 	}
 
 	var v *model.Metadata
-	if err := json.NewDecoder(req.Body).Decode(&v); err != nil {
+	if err := json.NewDecoder(resp.Body).Decode(&v); err != nil {
 		return nil, err
 	}
 
