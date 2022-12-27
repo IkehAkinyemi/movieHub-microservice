@@ -35,4 +35,3 @@ func (g *Gateway) Get(ctx context.Context, id string) (*model.Metadata, error) {
 	}
 	return model.MetadataFromProto(resp.Metadata), nil
 }
-

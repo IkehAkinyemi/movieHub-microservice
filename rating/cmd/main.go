@@ -49,7 +49,7 @@ func main() {
 	defer registry.Deregister(ctx, instanceID, serviceName)
 
 	repo := memory.New()
-	ctrl := rating.New(repo)
+	ctrl := rating.New(repo, nil)
 	h := grpchandler.New(ctrl)
 	listener, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", port))
 	if err != nil {

@@ -12,7 +12,7 @@ import (
 )
 
 // Handler defines a movie gRPC handler.
-type Handler struct  {
+type Handler struct {
 	gen.UnimplementedMovieServiceServer
 	ctrl *movie.Controller
 }
@@ -38,7 +38,7 @@ func (h *Handler) GetMovieDetails(ctx context.Context, req *gen.GetMovieDetailsR
 	return &gen.GetMovieDetailsResponse{
 		MovieDetails: &gen.MovieDetails{
 			Metadata: model.MetdataToProto(&m.Metadata),
-			Rating: *m.Rating,
+			Rating:   *m.Rating,
 		},
 	}, nil
 }
