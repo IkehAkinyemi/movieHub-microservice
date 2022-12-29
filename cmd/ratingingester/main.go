@@ -38,7 +38,6 @@ func main() {
 	producer.Flush(int(timeout.Milliseconds()))
 }
 
-
 func readRatingEvents(fileName string) ([]model.RatingEvent, error) {
 	f, err := os.Open(fileName)
 	if err != nil {
@@ -63,7 +62,7 @@ func produceRatingEvents(topic string, producer *kafka.Producer, ratingEvents []
 
 		if err := producer.Produce(&kafka.Message{
 			TopicPartition: kafka.TopicPartition{Topic: &topic, Partition: kafka.PartitionAny},
-			Value: []byte(encodedEvent),
+			Value:          []byte(encodedEvent),
 		}, nil); err != nil {
 			return err
 		}

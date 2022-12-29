@@ -19,7 +19,7 @@ type ratingRepository interface {
 
 // Controller defines a rating service controller.
 type Controller struct {
-	repo ratingRepository
+	repo     ratingRepository
 	ingester ratingIngester
 }
 

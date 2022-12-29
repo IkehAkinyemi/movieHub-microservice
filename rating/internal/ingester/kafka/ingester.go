@@ -12,14 +12,14 @@ import (
 // Ingester defines a Kafka ingester.
 type Ingester struct {
 	consumer *kafka.Consumer
-	topic string
+	topic    string
 }
 
 // NewIngester creates a new Kafka consumer.
 func NewIngester(addr string, groupID string, topic string) (*Ingester, error) {
 	consumer, err := kafka.NewConsumer(&kafka.ConfigMap{
 		"bootstrap.servers": addr,
-		"group.id": groupID,
+		"group.id":          groupID,
 		"auto.offset.reset": "earliest",
 	})
 	if err != nil {
@@ -38,7 +38,7 @@ func (i *Ingester) Ingest(ctx context.Context) (chan model.RatingEvent, error) {
 	}
 
 	ch := make(chan model.RatingEvent, 1)
-	go func ()  {
+	go func() {
 		for {
 			select {
 			case <-ctx.Done():

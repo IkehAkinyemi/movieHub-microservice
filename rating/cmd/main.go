@@ -15,7 +15,7 @@ import (
 	"moviehub.com/pkg/discovery/consul"
 	"moviehub.com/rating/internal/controller/rating"
 	grpchandler "moviehub.com/rating/internal/handler/grpc"
-	"moviehub.com/rating/internal/repository/memory"
+	"moviehub.com/rating/internal/repository/mysql"
 )
 
 const serviceName = "rating"
@@ -48,7 +48,11 @@ func main() {
 	}()
 	defer registry.Deregister(ctx, instanceID, serviceName)
 
-	repo := memory.New()
+	repo, err := mysql.New()
+	if err != nil {
+		panic(err)
+	}
+
 	ctrl := rating.New(repo, nil)
 	h := grpchandler.New(ctrl)
 	listener, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", port))
