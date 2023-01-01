@@ -8,6 +8,7 @@ require (
 	github.com/hashicorp/consul/api v1.18.0
 	google.golang.org/grpc v1.51.0
 	google.golang.org/protobuf v1.28.1
+	gopkg.in/yaml.v2 v2.2.8
 )
 
 require (

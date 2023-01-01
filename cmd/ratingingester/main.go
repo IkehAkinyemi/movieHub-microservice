@@ -46,7 +46,7 @@ func readRatingEvents(fileName string) ([]model.RatingEvent, error) {
 	defer f.Close()
 
 	var ratings []model.RatingEvent
-	if err := json.NewDecoder(f).Decode(ratings); err != nil {
+	if err := json.NewDecoder(f).Decode(&ratings); err != nil {
 		return nil, err
 	}
 
