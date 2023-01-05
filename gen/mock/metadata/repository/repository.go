@@ -15,7 +15,7 @@ import (
 type MockmetadataRepository struct {
 	ctrl     *gomock.Controller
 	recorder *MockmetadataRepositoryMockRecorder
-} 
+}
 
 // MockmetadataRepositoryMockRecorder is the mock recorder for MockmetadataRepository
 type MockmetadataRepositoryMockRecorder struct {
